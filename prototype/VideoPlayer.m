@@ -2,6 +2,8 @@
 
 @import UIKit;
 @import AVFoundation;
+@import Dispatch;
+
 
 @interface VideoPlayerView : UIView
 @property (nonatomic) AVPlayer *player;
@@ -69,7 +71,10 @@
         return YES;
     }
     
-    vpv.frame = window.frame;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        vpv.frame = window.frame;
+    });
+    
     
     if (! player.rate) {
         [ self stop ];
